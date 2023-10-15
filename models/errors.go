@@ -16,4 +16,6 @@ var (
 	ErrPassword = errors.New("username atau Password yang digunakan tidak valid")
 
 	ErrSomethingWrong = errors.New("Terjadi kesalahan")
+
+	ErrorLimitInquiry = errors.New("Pengajuan melebihi limit anda")
 )

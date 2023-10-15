@@ -5,6 +5,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"math/rand"
 	"os"
+	"sort"
 	"time"
 )
 
@@ -47,4 +48,19 @@ func GenerateString(long int) string {
 	}
 	return string(b)
 
+}
+
+func RandomTenor(maxValue int, count int) []int {
+	result := []int{}
+	for i := 0; i < count; i++ {
+		randomValue := rand.Intn(maxValue/200000) + 1
+
+		kelipatan := randomValue * 200000
+
+		result = append(result, kelipatan)
+	}
+
+	sort.Ints(result)
+
+	return result
 }
