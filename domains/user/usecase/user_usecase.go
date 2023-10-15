@@ -5,6 +5,7 @@ import (
 	"krepu_go_t/domains/user"
 	"krepu_go_t/helpers"
 	"krepu_go_t/models"
+	"math/rand"
 )
 
 type UserUseCase struct {
@@ -22,7 +23,8 @@ func (ur *UserUseCase) URegister(c echo.Context, payload models.UserPayload) (in
 
 	var err error
 	payload.Password, err = helpers.HashPassword(payload.Password)
-	if err = ur.userRepo.RCreateUser(c, payload); err != nil {
+	payload.Tenor = rand.Intn(4) + 1
+	if err = ur.userRepo.RCreateUser(payload); err != nil {
 		return nil, err
 	}
 
@@ -33,7 +35,7 @@ func (ur *UserUseCase) ULogin(c echo.Context, payload models.LoginPayload) (inte
 	var user models.User
 	var token string
 	var err error
-	if user, err = ur.userRepo.RGetUserByUserName(c, payload.UserName); err != nil {
+	if user, err = ur.userRepo.RGetUserByUserName(payload.UserName); err != nil {
 		return nil, err
 	}
 

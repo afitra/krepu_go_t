@@ -114,3 +114,15 @@ func getStatusCode(err error) int {
 		return http.StatusOK
 	}
 }
+
+func ReverseSuccessResponse(code string, status string, message string, data interface{}, err error) (interface{}, error) {
+	var resp Response
+	if code == "" {
+		code = CodeSuccess
+	}
+	resp.Code = code
+	resp.Status = status
+	resp.Message = message
+	resp.Data = data
+	return resp, err
+}

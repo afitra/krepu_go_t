@@ -3,6 +3,7 @@ package helpers
 import (
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
+	"math/rand"
 	"os"
 	"time"
 )
@@ -24,8 +25,8 @@ func GenerateToken(username string) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 
 	claims := token.Claims.(jwt.MapClaims)
-	claims["username"] = username
-	claims["exp"] = time.Now().Add(time.Hour * 24).Unix() // Token akan kadaluarsa dalam 24 jam
+	claims["user_name"] = username
+	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
 	var secretKey = []byte(os.Getenv("JWT_SECRET"))
 	tokenString, err := token.SignedString(secretKey)
@@ -34,4 +35,16 @@ func GenerateToken(username string) (string, error) {
 	}
 
 	return tokenString, nil
+}
+
+func GenerateString(long int) string {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+	var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
+	b := make([]byte, long)
+	for i := range b {
+		b[i] = charset[seededRand.Intn(len(charset))]
+	}
+	return string(b)
+
 }
