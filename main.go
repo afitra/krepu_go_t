@@ -8,10 +8,14 @@ import (
 	"github.com/labstack/echo"
 	_ "github.com/lib/pq"
 	"gopkg.in/go-playground/validator.v9"
+	_transactionHandler "krepu_go_t/domains/transaction/delivery/http"
+	_transactionRepository "krepu_go_t/domains/transaction/repository"
+	_transactionUseCase "krepu_go_t/domains/transaction/usecase"
 	_userHandler "krepu_go_t/domains/user/delivery/http"
 	_userRepository "krepu_go_t/domains/user/repository"
 	_userUseCase "krepu_go_t/domains/user/usecase"
 	"krepu_go_t/logger"
+	"krepu_go_t/middleware"
 	"krepu_go_t/models"
 	"net/http"
 	"os"
@@ -31,16 +35,25 @@ func main() {
 	defer sqlConn.Close()
 
 	echoGroup := models.EchoGroup{
-		API: ech.Group(""),
+		API:   ech.Group("/public"),
+		AUTH:  ech.Group("/private"),
+		ADMIN: ech.Group("/admin"),
 	}
+
+	//echoGroup.AUTH.Use(middleware.CheckTokenMiddleware)
+	middleware.InitMiddleware(ech, echoGroup, _userRepository.NewPsqlUser(sqlxConn))
 
 	customValidator := validator.New()
 
 	ech.Validator = &CustomValidator{validator: customValidator}
 
-	userRepository := _userRepository.NewPsqlUniqLink(sqlxConn)
+	userRepository := _userRepository.NewPsqlUser(sqlxConn)
 	_userUseCase := _userUseCase.NewUserUseCase(userRepository)
 	_userHandler.NewUserHandler(echoGroup, _userUseCase)
+
+	transactionRepository := _transactionRepository.NewPsqlTransaction(sqlxConn)
+	_transactionUseCase := _transactionUseCase.NewTransactionUseCase(transactionRepository)
+	_transactionHandler.NewTransactionHandler(echoGroup, _transactionUseCase)
 
 	ech.GET("/ping", ping)
 	err := ech.Start(":" + os.Getenv("APP_PORT"))

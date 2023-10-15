@@ -3,6 +3,7 @@ package models
 type User struct {
 	ID           int    `db:"id" json:"-"`
 	Nik          string `db:"nik" json:"nik"`
+	Role         string `db:"role" json:"role"`
 	UserName     string `db:"user_name" json:"user_name"`
 	Password     string `db:"password" json:"password"`
 	FullName     string `db:"full_name" json:"full_name"`
@@ -12,6 +13,7 @@ type User struct {
 	Gaji         int    `db:"gaji" json:"gaji"`
 	FotoKTP      string `db:"foto_ktp" json:"foto_ktp"`
 	FotoSelfie   string `db:"foto_selfie" json:"foto_selfie"`
+	Tenor        int    `db:"tenor" json:"tenor"`
 }
 
 type UserPayload struct {
@@ -25,6 +27,7 @@ type UserPayload struct {
 	Gaji         int    `db:"gaji" json:"gaji" validate:"required"`
 	FotoKTP      string `db:"foto_ktp" json:"foto_ktp" validate:"required"`
 	FotoSelfie   string `db:"foto_selfie" json:"foto_selfie" validate:"required"`
+	Tenor        int    `db:"tenor" json:"tenor" `
 }
 
 type LoginPayload struct {
