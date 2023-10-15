@@ -10,7 +10,11 @@ CREATE TABLE users (
     gaji INT NOT NULL,
     foto_ktp VARCHAR(255) NOT NULL,
     foto_selfie VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL DEFAULT 'user'
+    role VARCHAR(255) NOT NULL DEFAULT 'user',
+    tenor_satu INT NOT NULL,
+    tenor_dua INT NOT NULL,
+    tenor_tiga INT NOT NULL,
+    tenor_empat INT NOT NULL
 );
 
 
@@ -24,5 +28,7 @@ CREATE TABLE transactions (
     cicilan integer NOT NULL,
     bunga integer NOT NULL,
     nama_asset character varying(255) NOT NULL,
-    status boolean NOT NULL DEFAULT false
+    status boolean NOT NULL DEFAULT false,
+    pengajuan INT NOT NULL,
+    tenor INT NOT NULL
 );

@@ -15,9 +15,9 @@ func NewPsqlUser(sqlx *sqlx.DB) user.Repository {
 }
 
 func (p *Psql) RCreateUser(payload models.UserPayload) error {
-	query := "INSERT INTO users (nik, user_name, password, full_name, legal_name, tempat_lahir, tanggal_lahir, gaji, foto_ktp, foto_selfie, tenor) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)"
+	query := "INSERT INTO users (nik, user_name, password, full_name, legal_name, tempat_lahir, tanggal_lahir, gaji, foto_ktp, foto_selfie, tenor_satu, tenor_dua, tenor_tiga, tenor_empat) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);"
 
-	_, err := p.sqlx.Exec(query, payload.Nik, payload.UserName, payload.Password, payload.FullName, payload.LegalName, payload.TempatLahir, payload.TanggalLahir, payload.Gaji, payload.FotoKTP, payload.FotoSelfie, payload.Tenor)
+	_, err := p.sqlx.Exec(query, payload.Nik, payload.UserName, payload.Password, payload.FullName, payload.LegalName, payload.TempatLahir, payload.TanggalLahir, payload.Gaji, payload.FotoKTP, payload.FotoSelfie, payload.TenorSatu, payload.TenorDua, payload.TenorTiga, payload.TenorEmpat)
 	if err != nil {
 		return err
 	}
