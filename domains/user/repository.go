@@ -7,4 +7,5 @@ import (
 
 type Repository interface {
 	RCreateUser(c echo.Context, payload models.UserPayload) error
+	RGetUserByUserName(c echo.Context, user_name string) (models.User, error)
 }

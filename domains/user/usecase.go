@@ -7,5 +7,5 @@ import (
 
 type Usecase interface {
 	URegister(c echo.Context, payload models.UserPayload) (interface{}, error)
-	//ULogin(c echo.Context) (interface{}, error)
+	ULogin(c echo.Context, payload models.LoginPayload) (interface{}, error)
 }
