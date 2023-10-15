@@ -1,7 +1,6 @@
 package usecase
 
 import (
-	"fmt"
 	"github.com/labstack/echo"
 	"krepu_go_t/domains/transaction"
 	"krepu_go_t/helpers"
@@ -23,6 +22,10 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 
 	var transaction models.Transaction
 	var err error
+
+	for i := 1; i <= 4; i++ {
+
+	}
 	user := c.Get("decode").(models.User)
 	limit := 0
 	switch {
@@ -36,8 +39,7 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 		limit = user.TenorEmpat
 
 	}
-	fmt.Println("pengajuan  ", payload.Pengajuan)
-	fmt.Println("limit      ", limit)
+
 	if payload.Pengajuan > limit {
 		return ut.reverseSuccessResponse(models.CodeSuccess, models.ErrorLimitInquiry.Error(), models.ErrSomethingWrong.Error(), nil, models.ErrorLimitInquiry)
 	}
@@ -52,8 +54,19 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 	transaction.Tenor = payload.Tenor
 	transaction.Pengajuan = payload.Pengajuan
 
-	if err = ut.transactionRepo.RCreateTransaction(transaction); err != nil {
-		return nil, err
+	done := make(chan error)
+
+	go func() {
+		if err = ut.transactionRepo.RCreateTransaction(transaction); err != nil {
+			done <- err
+			return
+		}
+		done <- nil
+	}()
+
+	errFromGoroutine := <-done
+	if errFromGoroutine != nil {
+		return nil, errFromGoroutine
 	}
 
 	return models.ReverseSuccessResponse(models.CodeCreated, models.ResponseSuccess, models.MessageDataProcessing, nil, err)
