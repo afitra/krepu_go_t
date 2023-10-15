@@ -10,3 +10,15 @@ CREATE TABLE users (
     foto_ktp VARCHAR(255)  NOT NULL,
     foto_selfie VARCHAR(255)  NOT NULL
 );
+
+
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY,
+    no_kontrak VARCHAR(255)  NOT NULL,
+    otr integer  NOT NULL,
+    admin_fee integer  NOT NULL,
+    cicilan integer  NOT NULL,
+    bunga integer  NOT NULL,
+    nama_asset VARCHAR(255)  NOT NULL,
+
+);
