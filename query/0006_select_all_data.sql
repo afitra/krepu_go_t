@@ -1,1 +1,0 @@
-CALL getDataWithLimit(10);

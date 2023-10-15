@@ -1,1 +1,0 @@
-CALL getByCountry('Singapore',10);
