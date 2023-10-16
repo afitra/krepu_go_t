@@ -108,15 +108,12 @@ func getDBConn() (*sql.DB, *sqlx.DB) {
 	dbPass := os.Getenv(`DB_PASS`)
 	dbName := os.Getenv(`DB_NAME`)
 
-	// connection for sqlx
 	sqlxConnection := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable", dbUser, dbPass, dbHost, dbPort, dbName)
 	sqlxConn, err := sqlx.Connect("postgres", sqlxConnection)
-
 	if err != nil {
 		logger.Make(nil, nil).Debug(err)
 	}
 
-	// connection for sql/migration
 	sqlConnection := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		dbUser, dbPass, dbHost, dbPort, dbName)
 
@@ -129,7 +126,6 @@ func getDBConn() (*sql.DB, *sqlx.DB) {
 	err = sqlxConn.Ping()
 
 	if err != nil {
-		fmt.Println("xoxoxo ", err)
 		logger.Make(nil, nil).Debug(err)
 		os.Exit(1)
 	}

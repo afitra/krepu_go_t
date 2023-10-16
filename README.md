@@ -15,7 +15,7 @@
 
 ## Documentation
 - no 1 ada di folder query
-- no 2 lakukan Manual install project Golang ( port 8080 )
+- no 2 lakukan Manual install project Golang 
 
 
 ## Installation
@@ -24,9 +24,10 @@
 
     1. clone repository   
     2. masuk ke folder hasil clone
-    3. go mod download
-    4. go run main.go
-    5. enjoy with golang API with port 8080
+    3. setup .env file
+    4. go mod download
+    5. go run main.go
+    6. enjoy with golang API 
 
 
 
