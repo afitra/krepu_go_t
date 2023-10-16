@@ -32,3 +32,9 @@ CREATE TABLE transactions (
     pengajuan INT NOT NULL,
     tenor INT NOT NULL
 );
+
+
+
+INSERT INTO "users" ("id", "nik", "user_name", "password", "full_name", "legal_name", "tempat_lahir", "tanggal_lahir", "gaji", "foto_ktp", "foto_selfie", "role", "tenor_satu", "tenor_dua", "tenor_tiga", "tenor_empat") VALUES
+(3,	'3493493049d3049',	'apitoong',	'$2a$10$pOJ7JS/Uqqk68VZDi0ZimeGwDpxAmZ8s5oo0H2mnG6fhT4rAD/N/u',	'Afitra Mamor Bikhoir',	'Afitra Mamor Bikhoir',	'kediri',	'03-03-1996',	10000000,	'https://img.inews.co.id/media/600/files/networks/2022/06/20/ffb4c_anya-geraldine.jpg',	'https://img.inews.co.id/media/600/files/networks/2022/06/20/ffb4c_anya-geraldine.jpg',	'user',	1200000,	1800000,	2000000,	2000000),
+(1,	'34934930493049',	'admin123',	'$2a$10$Efh/oCrUYazpvci7Gh5P7Or/zA7vkeMuQfQRyv0ABFlrMaPhBx2GW',	'Afitra Mamor Bikhoir',	'Afitra Mamor Bikhoir',	'kediri',	'03-03-1996',	10000000,	'https://img.inews.co.id/media/600/files/networks/2022/06/20/ffb4c_anya-geraldine.jpg',	'https://img.inews.co.id/media/600/files/networks/2022/06/20/ffb4c_anya-geraldine.jpg',	'admin',	600000,	1000000,	1800000,	1800000);
