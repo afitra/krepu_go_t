@@ -41,7 +41,7 @@
 ## Testing
 
 #### run Unit Testing:
-    - c; go test ./test
+    - go test ./test
 
 #### Note
 
