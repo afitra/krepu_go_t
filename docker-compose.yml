@@ -1,28 +1,44 @@
-version: '3'
+version: '3.8'
 
 services:
   app:
-    build: .
+    image: golang:1.21.0
+    container_name: krepu_golang_echo_app
+    working_dir: /app
+    restart: always
+    volumes:
+      - ${PWD}:/app
     ports:
       - "${APP_PORT}:${APP_PORT}"
+    env_file:
+      - ${PWD}/.env
     environment:
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - DB_PORT=${DB_PORT}
-      - APP_PORT=${APP_PORT}
-      - JWT_SECRET=${JWT_SECRET}
+      - DB_HOST=krepu_postgres_db
+    command: >
+      bash -c "sleep 10 && go run main.go"
+    networks:
+      - krepu-network
     depends_on:
-      - postgres
+      - postgres_db
 
-  postgres:
+  postgres_db:
+    container_name: krepu_postgres_db
     image: postgres:9.6-alpine
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_HOST: ${DB_HOST}
-      POSTGRES_PORT: ${DB_PORT}
+    restart: always
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - PGPORT=${DB_PORT}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgresVolumeKrepu:/var/lib/postgresql/data
+    networks:
+      - krepu-network
+
+networks:
+  krepu-network:
+
+volumes:
+  postgresVolumeKrepu:
