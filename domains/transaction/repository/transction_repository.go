@@ -17,11 +17,11 @@ func NewPsqlTransaction(sqlx *sqlx.DB) transaction.Repository {
 func (p *Psql) RCreateTransaction(payload models.Transaction) error {
 	var err error
 	query := `
-        INSERT INTO transactions (user_id, no_kontrak, otr, admin_fee, cicilan, bunga, nama_asset)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO transactions (user_id, no_kontrak, otr, admin_fee, cicilan, bunga, nama_asset, tenor, pengajuan)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     `
 
-	if _, err = p.sqlx.Exec(query, payload.UserId, payload.NoKontrak, payload.OTR, payload.AdminFee, payload.Cicilan, payload.Bunga, payload.NamaAsset); err != nil {
+	if _, err = p.sqlx.Exec(query, payload.UserId, payload.NoKontrak, payload.OTR, payload.AdminFee, payload.Cicilan, payload.Bunga, payload.NamaAsset, payload.Tenor, payload.Pengajuan); err != nil {
 		return err
 	}
 

@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "fc9fda06-4f03-449f-9c13-6e0e4e4f38d9",
+		"name": "krepo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26430410"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/public/user/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nik\": \"3493493049d3049\",\n    \"full_name\": \"Afitra Mamor Bikhoir\",\n    \"legal_name\": \"Afitra Mamor Bikhoir\",\n    \"tempat_lahir\": \"kediri\",\n    \"tanggal_lahir\": \"03-03-1996\",\n    \"gaji\": 10000000,\n    \"foto_ktp\": \"https://img.inews.co.id/media/600/files/networks/2022/06/20/ffb4c_anya-geraldine.jpg\",\n    \"foto_selfie\": \"https://img.inews.co.id/media/600/files/networks/2022/06/20/ffb4c_anya-geraldine.jpg\",\n    \"user_name\":\"apitoong\",\n    \"password\":\"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/public/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/public/user/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_name\":\"admin123\",\n    \"password\":\"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/public/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/private/transaction/inquiry",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTc0NzE0NDQsInVzZXJfbmFtZSI6ImFwaXRvb25nIn0.lm86ktAJXXLAG8oEmgYXaFauHPMAHRjTZhONDi_pf5I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"otr\":1000,\n    \"admin_fee\":1000,\n    \"cicilan\":1000,\n    \"bunga\":2,\n    \"nama_asset\":\"rumah\",\n    \"tenor\":1,\n    \"pengajuan\":1000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/private/transaction/inquiry",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"private",
+						"transaction",
+						"inquiry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/admin/transaction/pay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTc0Nzc0MjQsInVzZXJfbmFtZSI6ImFkbWluMTIzIn0.o2rlOkTkY6zp5JOAAu6SPPRqu7FQUBGChE8Pivelqbo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"no_kontrak\":\"yPsv5V8DMC\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/admin/transaction/pay",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"admin",
+						"transaction",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

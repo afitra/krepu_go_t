@@ -22,7 +22,27 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 
 	var transaction models.Transaction
 	var err error
+
+	for i := 1; i <= 4; i++ {
+
+	}
 	user := c.Get("decode").(models.User)
+	limit := 0
+	switch {
+	case payload.Tenor == 1:
+		limit = user.TenorSatu
+	case payload.Tenor == 2:
+		limit = user.TenorDua
+	case payload.Tenor == 3:
+		limit = user.TenorTiga
+	case payload.Tenor == 4:
+		limit = user.TenorEmpat
+
+	}
+
+	if payload.Pengajuan > limit {
+		return ut.reverseSuccessResponse(models.CodeSuccess, models.ErrorLimitInquiry.Error(), models.ErrSomethingWrong.Error(), nil, models.ErrorLimitInquiry)
+	}
 
 	transaction.UserId = user.ID
 	transaction.NoKontrak = helpers.GenerateString(10)
@@ -31,9 +51,22 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 	transaction.Cicilan = payload.Cicilan
 	transaction.Bunga = payload.Bunga
 	transaction.NamaAsset = payload.NamaAsset
+	transaction.Tenor = payload.Tenor
+	transaction.Pengajuan = payload.Pengajuan
 
-	if err = ut.transactionRepo.RCreateTransaction(transaction); err != nil {
-		return nil, err
+	done := make(chan error)
+
+	go func() {
+		if err = ut.transactionRepo.RCreateTransaction(transaction); err != nil {
+			done <- err
+			return
+		}
+		done <- nil
+	}()
+
+	errFromGoroutine := <-done
+	if errFromGoroutine != nil {
+		return nil, errFromGoroutine
 	}
 
 	return models.ReverseSuccessResponse(models.CodeCreated, models.ResponseSuccess, models.MessageDataProcessing, nil, err)
