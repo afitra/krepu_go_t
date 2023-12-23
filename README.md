@@ -12,13 +12,8 @@
 
 
 ## Documentation
-<<<<<<< Updated upstream
-- no 1 ada di folder query
-- no 2 lakukan Manual install project Golang ( port 8080 )
-=======
 - no 1 ada di file query.sql
 - no 2 lakukan Manual install project Golang 
->>>>>>> Stashed changes
 
 
 ## Installation
@@ -26,12 +21,7 @@
 #### Manual instalation project Golang:
 
     1. clone repository   
-    2. masuk ke folder hasil clone
-<<<<<<< Updated upstream
-    3. go mod download
-    4. go run main.go
-    5. enjoy with golang API with port 8080
-=======
+    2. masuk ke folder hasil clon
     3. setup .env file
     4. go mod download
     5. go run main.go
@@ -47,7 +37,6 @@
     4. docker-compose up  -d
     5. eksekusi query.sql
     6. enjoy with golang API 
->>>>>>> Stashed changes
 
 
 #### Note
