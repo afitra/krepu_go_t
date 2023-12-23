@@ -54,7 +54,6 @@ func (uh *UserHandler) loginUser(c echo.Context) error {
 	var request models.LoginPayload
 	uh.response, uh.respErrors = models.NewResponse()
 	if err := c.Bind(&request); err != nil {
-
 		logger.Make(c, nil).Debug(err)
 		uh.respErrors.SetTitle(models.MessageUnprocessableEntity)
 		uh.response.SetResponse("", &uh.respErrors)

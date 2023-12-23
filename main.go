@@ -102,7 +102,10 @@ func loadEnv() {
 }
 
 func getDBConn() (*sql.DB, *sqlx.DB) {
-	dbHost := os.Getenv(`DB_HOST`)
+	dbHost := os.Getenv("DB_HOST")
+	if dbHost == "" {
+		dbHost = "localhost"
+	}
 	dbPort := os.Getenv(`DB_PORT`)
 	dbUser := os.Getenv(`DB_USER`)
 	dbPass := os.Getenv(`DB_PASS`)

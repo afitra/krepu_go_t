@@ -38,6 +38,10 @@
     5. eksekusi query.sql
     6. enjoy with golang API 
 
+## Testing
+
+#### run Unit Testing:
+    - c; go test ./test
 
 #### Note
 

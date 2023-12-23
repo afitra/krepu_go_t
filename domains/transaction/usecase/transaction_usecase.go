@@ -56,6 +56,10 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 
 	done := make(chan error)
 
+	result := map[string]interface{}{
+		"no_kontrak": transaction.NoKontrak,
+	}
+
 	go func() {
 		if err = ut.transactionRepo.RCreateTransaction(transaction); err != nil {
 			done <- err
@@ -69,7 +73,7 @@ func (ut *TransactionUseCase) UInquiryTransaction(c echo.Context, payload models
 		return nil, errFromGoroutine
 	}
 
-	return models.ReverseSuccessResponse(models.CodeCreated, models.ResponseSuccess, models.MessageDataProcessing, nil, err)
+	return models.ReverseSuccessResponse(models.CodeSuccess, models.ResponseSuccess, models.MessageDataProcessing, result, err)
 }
 
 func (ut *TransactionUseCase) UPayTransactions(c echo.Context, payload models.PayloadPay) (interface{}, error) {
